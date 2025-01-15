@@ -1,0 +1,69 @@
+@import "@fontsource-variable/inter";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main: #101828;
+  --text: #475467;
+  --gray: #6c717b;
+  --gray-light: #dadde1;
+  --badges: #f2f4f7;
+  --inputs: #f7f7f7;
+  --white: #ffffff;
+  --button: #e44848;
+  --button-hover: #d84343;
+  --rating: #ffc531;
+
+  --back-gradient: rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: "Inter Variable", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  color: var(--main);
+  background-color: var(--white);
+  max-width: 1440px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
