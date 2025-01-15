@@ -30,7 +30,6 @@ body {
   text-rendering: optimizeLegibility;
   color: var(--main);
   background-color: var(--white);
-  max-width: 1440px;
   text-align: center;
 }
 
