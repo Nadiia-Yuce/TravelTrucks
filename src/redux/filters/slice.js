@@ -30,5 +30,7 @@ const slice = createSlice({
   },
 });
 
+export const selectLocation = (state) => state.filters.location;
+export const selectEquipment = (state) => state.filters.equipment;
 export const { setLocation, setEquipment, resetFilters } = slice.actions;
 export default slice.reducer;
