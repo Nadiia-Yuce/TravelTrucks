@@ -14,7 +14,7 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampers.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = [...state.items, ...action.payload.items];
         state.isLoading = false;
       })
       .addCase(getCamperDetails.fulfilled, (state, action) => {
@@ -32,7 +32,8 @@ const slice = createSlice({
         isAnyOf(fetchCampers.rejected, getCamperDetails.rejected),
         (state, action) => {
           state.isLoading = false;
-          state.error = action.error.message;
+          // Передасть в помилку те, що прокинули у thunkAPI.rejectWithValue()
+          state.error = action.payload;
         }
       );
   },

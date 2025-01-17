@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
@@ -8,7 +9,7 @@ export const fetchCampers = createAsyncThunk(
   async ({ page = 1, filters = {} }, thunkAPI) => {
     try {
       //Початкова кверя, для пагінації
-      let query = `?${page}&limit=4`;
+      let query = `?page=${page}&limit=4`;
 
       //Перевірка на значення фільтрів (якщо є не дефолтні зміни, то цей фільтр додається у кверю)
       Object.keys(filters).forEach((key) => {
@@ -18,9 +19,10 @@ export const fetchCampers = createAsyncThunk(
         }
       });
 
-      const res = await axios.get(`/campers?${query}`);
+      const res = await axios.get(query);
       return res.data;
     } catch (error) {
+      toast.error("Error loading camper data!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -30,9 +32,10 @@ export const getCamperDetails = createAsyncThunk(
   "campers/getDetails",
   async (id, thunkAPI) => {
     try {
-      const res = await axios.get(`/campers/${id}`);
+      const res = await axios.get(`/${id}`);
       return res.data;
     } catch (error) {
+      toast.error("Error loading camper details!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
