@@ -17,10 +17,6 @@ export const fetchCampers = createAsyncThunk(
         if (filterValue !== "" && filterValue !== false) {
           query += `&${key}=${filterValue}`;
         }
-        console.log(
-          "Fetching campers with URL: ",
-          `${axios.defaults.baseURL}${query}`
-        );
       });
 
       const res = await axios.get(query);
