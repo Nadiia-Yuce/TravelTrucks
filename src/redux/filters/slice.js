@@ -2,35 +2,32 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   location: "",
-  equipment: {
-    AC: false,
-    transmission: "manual", // "automatic"
-    kitchen: false,
-    TV: false,
-    bathroom: false,
-    refrigerator: false,
-    form: "", // "van", "fullyIntegrated", "alcove"
-  },
+  AC: false,
+  transmission: "", // "automatic", "manual"
+  kitchen: false,
+  TV: false,
+  bathroom: false,
+  refrigerator: false,
+  form: "", // "van", "fullyIntegrated", "alcove"
 };
 
 const slice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    setLocation(state, action) {
-      state.location = action.payload;
+    setFilters(state, action) {
+      Object.keys(action.payload).forEach((key) => {
+        if (key in state) {
+          state[key] = action.payload[key];
+        }
+      });
     },
-    setEquipment(state, action) {
-      state.equipment = action.payload;
-    },
-    resetFilters(state) {
-      state.location = initialState.location;
-      state.equipment = initialState.equipment;
+    resetFilters() {
+      return initialState;
     },
   },
 });
 
-export const selectLocation = (state) => state.filters.location;
-export const selectEquipment = (state) => state.filters.equipment;
-export const { setLocation, setEquipment, resetFilters } = slice.actions;
+export const selectFilters = (state) => state.filters;
+export const { setFilters, resetFilters } = slice.actions;
 export default slice.reducer;
