@@ -6,10 +6,10 @@ axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
 export const fetchCampers = createAsyncThunk(
   "campers/getAllOrFiltered",
-  async ({ page = 1, filters = {} }, thunkAPI) => {
+  async ({ page = 1, limit = 4, filters = {} }, thunkAPI) => {
     try {
       //Початкова кверя, для пагінації
-      let query = `?page=${page}&limit=4`;
+      let query = `?page=${page}&limit=${limit}`;
 
       //Перевірка на значення фільтрів (якщо є не дефолтні зміни, то цей фільтр додається у кверю)
       Object.keys(filters).forEach((key) => {

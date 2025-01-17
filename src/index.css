@@ -30,11 +30,11 @@ body {
   text-rendering: optimizeLegibility;
   color: var(--main);
   background-color: var(--white);
-  text-align: center;
 }
 
 h1,
 h2,
+h3,
 p {
   margin: 0;
   padding: 0;

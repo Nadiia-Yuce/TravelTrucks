@@ -2,6 +2,7 @@ import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchCampers, getCamperDetails } from "./operations.js";
 
 const initialState = {
+  total: 0,
   items: [],
   selected: null,
   isLoading: false,
@@ -15,6 +16,7 @@ const slice = createSlice({
     builder
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.items = [...state.items, ...action.payload.items];
+        state.total = action.payload.total;
         state.isLoading = false;
       })
       .addCase(getCamperDetails.fulfilled, (state, action) => {

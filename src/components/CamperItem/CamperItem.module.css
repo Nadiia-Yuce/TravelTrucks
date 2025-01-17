@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+  gap: 34px;
+}
+
+.img {
+  border-radius: 10px;
+  width: 292px;
+  height: 320px;
+  object-fit: cover;
+  object-position: 80%;
+}
+
+.wrap {
+  width: 524px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrap div {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.general {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.icon {
+  width: 25px;
+  height: 24px;
+}
+
+.favorite {
+  fill: var(--button);
+}
+
+.details {
+  display: flex;
+  gap: 16px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  fill: var(--rating);
+}
+
+.descr {
+  max-width: 495px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Додає три крапки замість тексту, що не поміщається */
+  white-space: nowrap; /* Текст не переноситься на новий рядок */
+  color: var(--text);
+  margin: 24px 0;
+}
+
+.features {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.info {
+  width: 166px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  padding: 16px 40px;
+  border-radius: 50px;
+  background-color: var(--button);
+  transition: background-color 250ms ease;
+}
+
+.info:hover,
+info:focus {
+  background-color: var(--button-hover);
+}
+
+.info:active {
+  background-color: var(--button);
+}
+
+.lastWrap {
+  height: 184px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

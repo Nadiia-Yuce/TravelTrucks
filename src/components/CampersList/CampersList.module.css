@@ -1,11 +1,49 @@
-.list {
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 60%;
 }
 
 .notFound {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 .item {
+  border: 1px solid var(--gray-light);
+  border-radius: 20px;
+  padding: 24px;
+  width: 888px;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.item:last-child {
+  margin-bottom: 40px;
 }
 
 .btn {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding: 16px 32px;
+  border: 1px solid var(--gray-light);
+  border-radius: 50px;
+  background-color: var(--white);
+  transition: border 250ms ease;
+}
+
+.btn:hover,
+.btn:focus {
+  border: 1px solid var(--button-hover);
+}
+
+.btn:active {
+  border: 1px solid var(--gray-light);
+}
+
+.btn:disabled {
+  color: var(--gray-light);
 }
