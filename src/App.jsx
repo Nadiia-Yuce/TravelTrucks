@@ -1,12 +1,9 @@
-import { TailSpin } from "react-loader-spinner";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Navigation from "./components/Navigation/Navigation.jsx";
-import "./App.css";
 import { Toaster } from "react-hot-toast";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchCampers } from "./redux/campers/operations.js";
-// import { selectFilters } from "./redux/filters/slice.js";
+import Navigation from "./components/Navigation/Navigation.jsx";
+import Spinner from "./components/Spinner/Spinner.jsx";
+import "./App.css";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
 const CatalogPage = lazy(() => import("./pages/CatalogPage/CatalogPage.jsx"));
@@ -24,17 +21,10 @@ const CamperReviews = lazy(() =>
 );
 
 function App() {
-  // const dispatch = useDispatch();
-  // const filters = useSelector(selectFilters);
-
-  // useEffect(() => {
-  //   dispatch(fetchCampers({ filters }));
-  // }, [dispatch, filters]);
-
   return (
     <>
       <Navigation />
-      <Suspense fallback={<TailSpin />}>
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />

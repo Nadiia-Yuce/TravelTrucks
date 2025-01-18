@@ -1,17 +1,17 @@
-import css from "./CustomRadio.module.css";
+import css from "./CustomButton.module.css";
 import sprite from "../../icons/sprite.svg";
 import { Field } from "formik";
 
-export default function CustomRadio({ icon, text, value }) {
+export default function CustomButton({ name, type, icon, text, value }) {
   return (
     <>
-      <label htmlFor={value}>
+      <label>
         <Field
           className={css.real}
-          type="radio"
-          name="form"
+          type={type}
+          name={name}
           value={value}
-          id={value}
+          aria-label={text}
         />
         <span className={css.custom}>
           <svg className={css.icon}>
@@ -19,7 +19,6 @@ export default function CustomRadio({ icon, text, value }) {
           </svg>
           <p className={css.text}>{text}</p>
         </span>
-        <p className={css.real}>{text}</p>
       </label>
     </>
   );

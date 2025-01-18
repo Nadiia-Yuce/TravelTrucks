@@ -1,33 +1,114 @@
 import { Form, Formik } from "formik";
 import css from "./FiltersForm.module.css";
-import CustomRadio from "../CustomRadio/CustomRadio.jsx";
+import CustomButton from "../CustomButton/CustomButton.jsx";
+import { useDispatch } from "react-redux";
+import { resetFilters, setFilters } from "../../redux/filters/slice.js";
+import { resetItems, resetPage } from "../../redux/campers/slice.js";
 
 export default function FiltersForm() {
+  const dispatch = useDispatch();
   const initialValues = {
-    form: "",
+    type: "",
+    equipment: [],
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
+    const result = {
+      AC: values.equipment.includes("ac"),
+      transmission: values.equipment.includes("automatic") ? "automatic" : "",
+      kitchen: values.equipment.includes("kitchen"),
+      TV: values.equipment.includes("tv"),
+      bathroom: values.equipment.includes("bathroom"),
+      refrigerator: values.equipment.includes("refrigerator"),
+      form: values.type,
+    };
+
+    dispatch(resetItems());
+    dispatch(resetPage());
+    // dispatch(resetFilters())
+    dispatch(setFilters(result));
   };
 
   return (
     <Formik onSubmit={handleSubmit} initialValues={initialValues}>
       <Form className={css.form}>
-        <h3 className={css.filter}>Vehicle equipment</h3>
-        <h3 className={css.filter}>Vehicle type</h3>
+        <fieldset>
+          <legend className={css.filter}>Vehicle equipment</legend>
+          <div className={css.checkboxGroup}>
+            <CustomButton
+              name="equipment"
+              type="checkbox"
+              icon="wind"
+              text="AC"
+              value="ac"
+            />
+            <CustomButton
+              name="equipment"
+              type="checkbox"
+              icon="diagram"
+              text="Automatic"
+              value="automatic"
+            />
+            <CustomButton
+              name="equipment"
+              type="checkbox"
+              icon="cup-hot"
+              text="Kitchen"
+              value="kitchen"
+            />
+            <CustomButton
+              name="equipment"
+              type="checkbox"
+              icon="tv"
+              text="TV"
+              value="tv"
+            />
+            <CustomButton
+              name="equipment"
+              type="checkbox"
+              icon="shower"
+              text="Bathroom"
+              value="bathroom"
+            />
+            <CustomButton
+              name="equipment"
+              type="checkbox"
+              icon="fridge"
+              text="Refrigerator"
+              value="refrigerator"
+            />
+          </div>
+        </fieldset>
 
-        <div className={css.radioGroup}>
-          <CustomRadio icon="l-grid" text="Van" value="van" />
+        <fieldset>
+          <legend className={css.filter}>Vehicle type</legend>
 
-          <CustomRadio
-            icon="m-grid"
-            text="Fully Integrated"
-            value="fullyIntegrated"
-          />
+          <div className={css.radioGroup}>
+            <CustomButton
+              name="type"
+              type="radio"
+              icon="l-grid"
+              text="Van"
+              value="van"
+            />
 
-          <CustomRadio icon="s-grid" text="Alcove" value="alcove" />
-        </div>
+            <CustomButton
+              name="type"
+              type="radio"
+              icon="m-grid"
+              text="Fully Integrated"
+              value="fullyIntegrated"
+            />
+
+            <CustomButton
+              name="type"
+              type="radio"
+              icon="s-grid"
+              text="Alcove"
+              value="alcove"
+            />
+          </div>
+        </fieldset>
 
         <button type="submit" className={css.btn}>
           Search

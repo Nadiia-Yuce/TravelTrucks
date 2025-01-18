@@ -7,12 +7,12 @@ import {
   selectPagination,
   selectTotal,
 } from "../../redux/campers/selectors.js";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { selectFilters } from "../../redux/filters/slice.js";
 import { fetchCampers } from "../../redux/campers/operations.js";
-import { TailSpin } from "react-loader-spinner";
 import CamperItem from "../CamperItem/CamperItem.jsx";
 import { setPage } from "../../redux/campers/slice.js";
+import Spinner from "../Spinner/Spinner.jsx";
 
 export default function CampersList() {
   const dispatch = useDispatch();
@@ -27,31 +27,18 @@ export default function CampersList() {
   const error = useSelector(selectError);
   const campers = useSelector(selectCampers);
   const total = useSelector(selectTotal);
-  const scrollPosition = useRef(0);
 
   const totalPages = Math.ceil(total / limit);
 
-  useEffect(() => {
-    if (scrollPosition.current > 0) {
-      window.scrollTo({
-        top: scrollPosition.current, // Встановлюємо скрол на збережену позицію
-        behavior: "auto", // Без плавного скролу
-      });
-    }
-  }, [campers]);
-
   const loadMore = () => {
-    scrollPosition.current = window.scrollY; // Збереження поточної позиції скролу
     dispatch(setPage(page + 1));
   };
 
   return (
     <div>
-      {loading ? (
-        <div className={css.spinner}>
-          <TailSpin color="var(--button-hover)" />
-        </div>
-      ) : campers.length === 0 || error ? (
+      {loading && <Spinner />}
+
+      {(!loading && campers.length === 0) || error ? (
         <p className={css.notFound}>
           There are no campers, matching your query!
         </p>
