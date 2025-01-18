@@ -1,0 +1,36 @@
+.form {
+}
+
+.filter {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.radioGroup {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.btn {
+  padding: 16px 56px;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--button);
+  font-weight: 500;
+  color: var(--white);
+  transition: background-color 250ms ease;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: var(--button-hover);
+}
+
+.btn:active {
+  background-color: var(--button);
+}

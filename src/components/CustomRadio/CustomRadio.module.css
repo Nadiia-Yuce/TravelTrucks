@@ -1,0 +1,36 @@
+.real {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+}
+
+.custom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 112px;
+  height: 96px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-light);
+  cursor: pointer;
+  transition: border 250ms ease;
+}
+
+.real:checked + .custom {
+  border: 1px solid var(--button);
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.text {
+  margin-top: 8px;
+  font-weight: 500;
+  text-align: center;
+}
