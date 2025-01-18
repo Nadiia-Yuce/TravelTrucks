@@ -62,7 +62,9 @@ export default function CamperItem({
             <svg className={css.star}>
               <use href={`${sprite}#icon-star`} />
             </svg>
-            <p>{`${rating} (${reviewsCount} Reviews)`}</p>
+            <p
+              style={{ textDecoration: "underline" }}
+            >{`${rating} (${reviewsCount} Reviews)`}</p>
           </div>
 
           <div className={css.rating}>

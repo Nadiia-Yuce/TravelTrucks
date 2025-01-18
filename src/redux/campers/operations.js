@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
 export const fetchCampers = createAsyncThunk(
-  "campers/getAllOrFiltered",
+  "campers/getAll",
   async ({ page = 1, limit = 4, filters = {} }, thunkAPI) => {
     try {
       //Початкова кверя, для пагінації

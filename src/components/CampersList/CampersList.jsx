@@ -4,23 +4,24 @@ import {
   selectCampers,
   selectError,
   selectIsLoading,
+  selectPagination,
   selectTotal,
 } from "../../redux/campers/selectors.js";
-import { useEffect, useRef, useState } from "react";
-// import { selectFilters } from "../../redux/filters/slice.js";
-// import { fetchCampers } from "../../redux/campers/operations.js";
-import CamperItem from "../CamperItem/CamperItem.jsx";
+import { useEffect, useRef } from "react";
+import { selectFilters } from "../../redux/filters/slice.js";
+import { fetchCampers } from "../../redux/campers/operations.js";
 import { TailSpin } from "react-loader-spinner";
+import CamperItem from "../CamperItem/CamperItem.jsx";
+import { setPage } from "../../redux/campers/slice.js";
 
 export default function CampersList() {
-  // const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
-  // const filters = useSelector(selectFilters);
-  let limit = 4;
+  const dispatch = useDispatch();
+  const filters = useSelector(selectFilters);
+  const { page, limit } = useSelector(selectPagination);
 
-  // useEffect(() => {
-  //   dispatch(fetchCampers({ page, limit, filters }));
-  // }, [dispatch, page, limit, filters]);
+  useEffect(() => {
+    dispatch(fetchCampers({ page, limit, filters }));
+  }, [dispatch, page, limit, filters]);
 
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
@@ -41,7 +42,7 @@ export default function CampersList() {
 
   const loadMore = () => {
     scrollPosition.current = window.scrollY; // Збереження поточної позиції скролу
-    setPage((prevPage) => prevPage + 1);
+    dispatch(setPage(page + 1));
   };
 
   return (
@@ -50,12 +51,12 @@ export default function CampersList() {
         <div className={css.spinner}>
           <TailSpin color="var(--button-hover)" />
         </div>
-      ) : campers.length === 0 && !error ? (
+      ) : campers.length === 0 || error ? (
         <p className={css.notFound}>
           There are no campers, matching your query!
         </p>
       ) : (
-        <div>
+        <div className={css.container}>
           <ul>
             {campers.map((camper) => (
               <li key={camper.id} className={css.item}>
@@ -63,14 +64,16 @@ export default function CampersList() {
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            className={css.btn}
-            onClick={loadMore}
-            disabled={page >= totalPages}
-          >
-            Load more
-          </button>
+          {!loading && !error && (
+            <button
+              type="button"
+              className={css.btn}
+              onClick={loadMore}
+              disabled={page >= totalPages}
+            >
+              Load more
+            </button>
+          )}
         </div>
       )}
     </div>

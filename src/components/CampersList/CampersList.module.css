@@ -10,6 +10,13 @@
   left: 50%;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .item {
   border: 1px solid var(--gray-light);
   border-radius: 20px;
@@ -32,6 +39,7 @@
   border: 1px solid var(--gray-light);
   border-radius: 50px;
   background-color: var(--white);
+  text-align: center;
   transition: border 250ms ease;
 }
 
@@ -46,4 +54,7 @@
 
 .btn:disabled {
   color: var(--gray-light);
+  border: 1px solid var(--gray-light);
+  cursor: not-allowed;
+  /* pointer-events: none; */
 }

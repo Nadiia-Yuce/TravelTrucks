@@ -2,6 +2,7 @@ import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchCampers, getCamperDetails } from "./operations.js";
 
 const initialState = {
+  pagination: { page: 1, limit: 4 },
   total: 0,
   items: [],
   selected: null,
@@ -12,6 +13,17 @@ const initialState = {
 const slice = createSlice({
   name: "campers",
   initialState,
+  reducers: {
+    resetItems(state) {
+      state.items = [];
+    },
+    resetPage(state) {
+      state.pagination.page = 1;
+    },
+    setPage(state, action) {
+      state.pagination.page = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampers.fulfilled, (state, action) => {
@@ -41,4 +53,5 @@ const slice = createSlice({
   },
 });
 
+export const { resetItems, resetPage, setPage } = slice.actions;
 export default slice.reducer;
