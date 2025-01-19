@@ -10,6 +10,7 @@ import {
 import Details from "../../components/Details/Details.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import clsx from "clsx";
+import BookingForm from "../../components/BookingForm/BookingForm.jsx";
 
 export default function CamperDetailsPage() {
   const { id } = useParams();
@@ -66,7 +67,10 @@ export default function CamperDetailsPage() {
           </NavLink>
         </li>
       </ul>
-      <Outlet />
+      <div className={css.wrap}>
+        <Outlet />
+        <BookingForm />
+      </div>
     </div>
   );
 }

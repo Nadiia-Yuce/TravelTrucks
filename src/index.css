@@ -56,6 +56,7 @@ input {
 }
 
 button {
+  display: block;
   cursor: pointer;
   outline: none;
 }
