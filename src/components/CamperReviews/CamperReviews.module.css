@@ -1,0 +1,51 @@
+.mainList {
+  width: 630px;
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.wrap {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.ratingWrap p {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  color: var(--button);
+  border-radius: 50px;
+  background-color: var(--badges);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  fill: var(--badges);
+}
+
+.activeStar {
+  fill: var(--rating);
+}
+
+.comment {
+  color: var(--text);
+}

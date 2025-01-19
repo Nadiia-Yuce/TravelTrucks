@@ -39,23 +39,6 @@
   fill: var(--button);
 }
 
-.details {
-  display: flex;
-  gap: 16px;
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.star {
-  width: 16px;
-  height: 16px;
-  fill: var(--rating);
-}
-
 .descr {
   max-width: 495px;
   overflow: hidden;

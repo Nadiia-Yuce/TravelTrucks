@@ -1,14 +1,15 @@
 import css from "./CamperItem.module.css";
+import clsx from "clsx";
 import sprite from "../../icons/sprite.svg";
 import { IconButton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import Feature from "../Feature/Feature.jsx";
+import { Link } from "react-router-dom";
 import {
   selectFavorites,
   toggleFavorite,
 } from "../../redux/favorites/slice.js";
-import { useDispatch, useSelector } from "react-redux";
-import clsx from "clsx";
-import Feature from "../Feature/Feature.jsx";
-import { Link } from "react-router-dom";
+import Details from "../Details/Details.jsx";
 
 export default function CamperItem({
   camper: {
@@ -36,8 +37,6 @@ export default function CamperItem({
     return clsx(css.icon, isFavorite && css.favorite);
   };
 
-  const reviewsCount = reviews.length;
-
   return (
     <div className={css.container}>
       <img src={gallery[0].thumb} alt={`Camper: ${name}`} className={css.img} />
@@ -57,23 +56,8 @@ export default function CamperItem({
           </div>
         </div>
 
-        <div className={css.details}>
-          <div className={css.rating}>
-            <svg className={css.star}>
-              <use href={`${sprite}#icon-star`} />
-            </svg>
-            <p
-              style={{ textDecoration: "underline" }}
-            >{`${rating} (${reviewsCount} Reviews)`}</p>
-          </div>
+        <Details location={location} rating={rating} reviews={reviews} />
 
-          <div className={css.rating}>
-            <svg width={16} height={16}>
-              <use href={`${sprite}#icon-map`} />
-            </svg>
-            <p>{location}</p>
-          </div>
-        </div>
         <p className={css.descr}>{description}</p>
         <div className={css.lastWrap}>
           <ul className={css.features}>

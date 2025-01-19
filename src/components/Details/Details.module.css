@@ -1,0 +1,16 @@
+.details {
+  display: flex;
+  gap: 16px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  fill: var(--rating);
+}

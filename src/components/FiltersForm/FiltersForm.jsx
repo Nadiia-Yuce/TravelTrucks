@@ -1,12 +1,14 @@
 import { Form, Formik } from "formik";
 import css from "./FiltersForm.module.css";
 import CustomButton from "../CustomButton/CustomButton.jsx";
-import { useDispatch } from "react-redux";
-import { resetFilters, setFilters } from "../../redux/filters/slice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilters } from "../../redux/filters/slice.js";
 import { resetItems, resetPage } from "../../redux/campers/slice.js";
+import { selectIsLoading } from "../../redux/campers/selectors.js";
 
 export default function FiltersForm() {
   const dispatch = useDispatch();
+  const loading = useSelector(selectIsLoading);
   const initialValues = {
     type: "",
     equipment: [],
@@ -25,7 +27,6 @@ export default function FiltersForm() {
 
     dispatch(resetItems());
     dispatch(resetPage());
-    // dispatch(resetFilters())
     dispatch(setFilters(result));
   };
 
@@ -110,7 +111,7 @@ export default function FiltersForm() {
           </div>
         </fieldset>
 
-        <button type="submit" className={css.btn}>
+        <button type="submit" className={css.btn} disabled={loading}>
           Search
         </button>
       </Form>

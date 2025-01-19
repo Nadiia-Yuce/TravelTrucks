@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Navigation from "./components/Navigation/Navigation.jsx";
 import Spinner from "./components/Spinner/Spinner.jsx";
@@ -20,7 +20,7 @@ const CamperReviews = lazy(() =>
   import("./components/CamperReviews/CamperReviews.jsx")
 );
 
-function App() {
+export default function App() {
   return (
     <>
       <Navigation />
@@ -29,6 +29,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:id" element={<CamperDetailsPage />}>
+            <Route index element={<Navigate to="features" />} />
             <Route path="features" element={<CamperFeatures />} />
             <Route path="reviews" element={<CamperReviews />} />
           </Route>
@@ -39,5 +40,3 @@ function App() {
     </>
   );
 }
-
-export default App;
