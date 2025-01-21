@@ -27,7 +27,13 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampers.fulfilled, (state, action) => {
-        state.items = [...state.items, ...action.payload.items];
+        //Фільтрація вже існуючих карток, уникання дублювання
+        const newItems = action.payload.items.filter(
+          (newItem) =>
+            !state.items.some((existedItem) => newItem.id === existedItem.id)
+        );
+
+        state.items = [...state.items, ...newItems];
         state.total = action.payload.total;
         state.isLoading = false;
       })

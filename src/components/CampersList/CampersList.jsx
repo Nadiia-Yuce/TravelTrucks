@@ -4,24 +4,32 @@ import {
   selectCampers,
   selectError,
   selectIsLoading,
-  selectPagination,
   selectTotal,
 } from "../../redux/campers/selectors.js";
 import { useEffect } from "react";
 import { selectFilters } from "../../redux/filters/slice.js";
 import { fetchCampers } from "../../redux/campers/operations.js";
 import CamperItem from "../CamperItem/CamperItem.jsx";
-import { setPage } from "../../redux/campers/slice.js";
 import Spinner from "../Spinner/Spinner.jsx";
+import { useSearchParams } from "react-router-dom";
 
 export default function CampersList() {
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
   const filters = useSelector(selectFilters);
-  const { page, limit } = useSelector(selectPagination);
+  const page = searchParams.get("page") || 1;
+  const limit = searchParams.get("limit") || 4;
+
+  //! Тригерить подвійний запит на сервер
+  // useEffect(() => {
+  //   searchParams.set("page", page);
+  //   searchParams.set("limit", limit);
+  //   setSearchParams(searchParams);
+  // }, [searchParams, setSearchParams, page, limit]);
 
   useEffect(() => {
     dispatch(fetchCampers({ page, limit, filters }));
-  }, [dispatch, page, limit, filters]);
+  }, [page, limit, filters, dispatch]);
 
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
@@ -31,7 +39,11 @@ export default function CampersList() {
   const totalPages = Math.ceil(total / limit);
 
   const loadMore = () => {
-    dispatch(setPage(page + 1));
+    const newPage = Number(page) + 1;
+
+    searchParams.set("page", newPage);
+    searchParams.set("limit", Number(limit));
+    setSearchParams(searchParams);
   };
 
   return (
