@@ -1,9 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import css from "./FiltersForm.module.css";
 import CustomButton from "../CustomButton/CustomButton.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { setFilters } from "../../redux/filters/slice.js";
-import { resetItems, resetPage } from "../../redux/campers/slice.js";
+import { useSelector } from "react-redux";
 import { selectIsLoading } from "../../redux/campers/selectors.js";
 import { useSearchParams } from "react-router-dom";
 import sprite from "../../icons/sprite.svg";
@@ -11,24 +9,24 @@ import { useMemo } from "react";
 
 export default function FiltersForm() {
   const loading = useSelector(selectIsLoading);
-  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = useMemo(
     () => Object.fromEntries(searchParams.entries()),
     [searchParams]
   );
-  const { page, limit, ...initial } = query;
+
+  console.log(query);
 
   const initialValues = {
-    location: initial?.location || "",
-    form: initial?.form || "",
+    location: query?.location || "",
+    form: query?.form || "",
     equipment: [
-      initial?.AC === "true" ? "ac" : "",
-      initial?.transmission === "automatic" ? "automatic" : "",
-      initial?.kitchen === "true" ? "kitchen" : "",
-      initial?.TV === "true" ? "tv" : "",
-      initial?.bathroom === "true" ? "bathroom" : "",
-      initial?.refrigerator === "true" ? "refrigerator" : "",
+      query?.AC === "true" ? "ac" : "",
+      query?.transmission === "automatic" ? "automatic" : "",
+      query?.kitchen === "true" ? "kitchen" : "",
+      query?.TV === "true" ? "tv" : "",
+      query?.bathroom === "true" ? "bathroom" : "",
+      query?.refrigerator === "true" ? "refrigerator" : "",
     ].filter(Boolean),
   };
 
@@ -51,116 +49,118 @@ export default function FiltersForm() {
         searchParams.delete(key);
       }
     });
-
+    searchParams.set("page", "1");
     setSearchParams(searchParams);
-
-    dispatch(resetItems());
-    dispatch(resetPage());
-    dispatch(setFilters(result));
   };
 
   return (
     <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-      <Form className={css.form}>
-        <div className={css.wrap}>
-          <label htmlFor="location" className={css.label}>
-            Location
-          </label>
-          <Field
-            className={css.input}
-            type="text"
-            name="location"
-            placeholder="City"
-          />
-          <svg className={css.map}>
-            <use href={`${sprite}#icon-map`} />
-          </svg>
-        </div>
-
-        <p className={css.text}>Filters</p>
-
-        <fieldset>
-          <legend className={css.filter}>Vehicle equipment</legend>
-          <div className={css.checkboxGroup}>
-            <CustomButton
-              name="equipment"
-              type="checkbox"
-              icon="wind"
-              text="AC"
-              value="ac"
+      {({ dirty }) => (
+        <Form className={css.form}>
+          <div className={css.wrap}>
+            <label htmlFor="location" className={css.label}>
+              Location
+            </label>
+            <Field
+              className={css.input}
+              type="text"
+              name="location"
+              placeholder="City"
             />
-            <CustomButton
-              name="equipment"
-              type="checkbox"
-              icon="diagram"
-              text="Automatic"
-              value="automatic"
-            />
-            <CustomButton
-              name="equipment"
-              type="checkbox"
-              icon="cup-hot"
-              text="Kitchen"
-              value="kitchen"
-            />
-            <CustomButton
-              name="equipment"
-              type="checkbox"
-              icon="tv"
-              text="TV"
-              value="tv"
-            />
-            <CustomButton
-              name="equipment"
-              type="checkbox"
-              icon="shower"
-              text="Bathroom"
-              value="bathroom"
-            />
-            <CustomButton
-              name="equipment"
-              type="checkbox"
-              icon="fridge"
-              text="Refrigerator"
-              value="refrigerator"
-            />
+            <svg className={css.map}>
+              <use href={`${sprite}#icon-map`} />
+            </svg>
           </div>
-        </fieldset>
 
-        <fieldset>
-          <legend className={css.filter}>Vehicle type</legend>
+          <p className={css.text}>Filters</p>
 
-          <div className={css.radioGroup}>
-            <CustomButton
-              name="form"
-              type="radio"
-              icon="l-grid"
-              text="Van"
-              value="van"
-            />
+          <fieldset>
+            <legend className={css.filter}>Vehicle equipment</legend>
+            <div className={css.checkboxGroup}>
+              <CustomButton
+                name="equipment"
+                type="checkbox"
+                icon="wind"
+                text="AC"
+                value="ac"
+              />
+              <CustomButton
+                name="equipment"
+                type="checkbox"
+                icon="diagram"
+                text="Automatic"
+                value="automatic"
+              />
+              <CustomButton
+                name="equipment"
+                type="checkbox"
+                icon="cup-hot"
+                text="Kitchen"
+                value="kitchen"
+              />
+              <CustomButton
+                name="equipment"
+                type="checkbox"
+                icon="tv"
+                text="TV"
+                value="tv"
+              />
+              <CustomButton
+                name="equipment"
+                type="checkbox"
+                icon="shower"
+                text="Bathroom"
+                value="bathroom"
+              />
+              <CustomButton
+                name="equipment"
+                type="checkbox"
+                icon="fridge"
+                text="Refrigerator"
+                value="refrigerator"
+              />
+            </div>
+          </fieldset>
 
-            <CustomButton
-              name="form"
-              type="radio"
-              icon="m-grid"
-              text="Fully Integrated"
-              value="fullyIntegrated"
-            />
+          <fieldset>
+            <legend className={css.filter}>Vehicle type</legend>
 
-            <CustomButton
-              name="form"
-              type="radio"
-              icon="s-grid"
-              text="Alcove"
-              value="alcove"
-            />
-          </div>
-        </fieldset>
+            <div className={css.radioGroup}>
+              <CustomButton
+                name="form"
+                type="radio"
+                icon="l-grid"
+                text="Van"
+                value="panelTruck"
+              />
 
-        <button type="submit" className={css.btn} disabled={loading}>
-          Search
-        </button>
-      </Form>
+              <CustomButton
+                name="form"
+                type="radio"
+                icon="m-grid"
+                text="Fully Integrated"
+                value="fullyIntegrated"
+              />
+
+              <CustomButton
+                name="form"
+                type="radio"
+                icon="s-grid"
+                text="Alcove"
+                value="alcove"
+              />
+            </div>
+          </fieldset>
+
+          <button
+            type="submit"
+            className={css.btn}
+            disabled={!dirty || loading}
+          >
+            Search
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 }

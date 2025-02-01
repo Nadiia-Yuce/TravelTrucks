@@ -8,7 +8,7 @@ const initialState = {
   TV: false,
   bathroom: false,
   refrigerator: false,
-  form: "", // "van", "fullyIntegrated", "alcove"
+  form: "", // "panelTruck", "fullyIntegrated", "alcove"
 };
 
 const slice = createSlice({

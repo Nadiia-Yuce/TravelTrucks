@@ -6,42 +6,55 @@ import {
   selectIsLoading,
   selectTotal,
 } from "../../redux/campers/selectors.js";
-import { useEffect, useMemo } from "react";
-import { selectFilters, setFilters } from "../../redux/filters/slice.js";
+import { useEffect, useMemo, useRef } from "react";
 import { fetchCampers } from "../../redux/campers/operations.js";
 import CamperItem from "../CamperItem/CamperItem.jsx";
 import Spinner from "../Spinner/Spinner.jsx";
 import { useSearchParams } from "react-router-dom";
+import { resetItems } from "../../redux/campers/slice.js";
 
 export default function CampersList() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const filters = useSelector(selectFilters);
   const query = useMemo(
     () => Object.fromEntries(searchParams.entries()),
     [searchParams]
   );
-  const { page = 1, limit = 4, ...initial } = query;
+  const { page = 1, limit = 4, ...filters } = query;
+
+  const prevFilters = useRef(null);
 
   useEffect(() => {
-    // dispatch(setFilters(initial));
+    const prevState = JSON.stringify({
+      filters: prevFilters.current,
+      page: prevFilters.currentPage,
+      limit: prevFilters.currentLimit,
+    });
+    const currentState = JSON.stringify({ filters, page, limit });
+
+    if (prevState === currentState) return;
+
+    if (JSON.stringify(prevFilters.current) !== JSON.stringify(filters)) {
+      dispatch(resetItems());
+    }
+
+    prevFilters.current = filters;
+    prevFilters.currentPage = page;
+    prevFilters.currentLimit = limit;
+
     dispatch(fetchCampers({ page, limit, filters }));
-  }, [page, limit, filters, dispatch]);
+  }, [filters, page, limit, dispatch, searchParams]);
 
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const campers = useSelector(selectCampers);
-  // console.log("filters", filters);
-
   const total = useSelector(selectTotal);
 
   const totalPages = Math.ceil(total / limit);
 
   const loadMore = () => {
     const newPage = Number(page) + 1;
-
     searchParams.set("page", newPage);
-    searchParams.set("limit", Number(limit));
     setSearchParams(searchParams);
   };
 

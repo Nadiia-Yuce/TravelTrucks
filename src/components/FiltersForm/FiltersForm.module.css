@@ -87,3 +87,9 @@ fieldset {
 .btn:active {
   background-color: var(--button);
 }
+
+.btn:disabled {
+  background-color: var(--badges);
+  color: var(--gray);
+  cursor: not-allowed;
+}
