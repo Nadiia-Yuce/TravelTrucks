@@ -6,8 +6,8 @@ import {
   selectIsLoading,
   selectTotal,
 } from "../../redux/campers/selectors.js";
-import { useEffect } from "react";
-import { selectFilters } from "../../redux/filters/slice.js";
+import { useEffect, useMemo } from "react";
+import { selectFilters, setFilters } from "../../redux/filters/slice.js";
 import { fetchCampers } from "../../redux/campers/operations.js";
 import CamperItem from "../CamperItem/CamperItem.jsx";
 import Spinner from "../Spinner/Spinner.jsx";
@@ -17,23 +17,22 @@ export default function CampersList() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const filters = useSelector(selectFilters);
-  const page = searchParams.get("page") || 1;
-  const limit = searchParams.get("limit") || 4;
-
-  //! Тригерить подвійний запит на сервер
-  // useEffect(() => {
-  //   searchParams.set("page", page);
-  //   searchParams.set("limit", limit);
-  //   setSearchParams(searchParams);
-  // }, [searchParams, setSearchParams, page, limit]);
+  const query = useMemo(
+    () => Object.fromEntries(searchParams.entries()),
+    [searchParams]
+  );
+  const { page = 1, limit = 4, ...initial } = query;
 
   useEffect(() => {
+    // dispatch(setFilters(initial));
     dispatch(fetchCampers({ page, limit, filters }));
   }, [page, limit, filters, dispatch]);
 
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const campers = useSelector(selectCampers);
+  // console.log("filters", filters);
+
   const total = useSelector(selectTotal);
 
   const totalPages = Math.ceil(total / limit);

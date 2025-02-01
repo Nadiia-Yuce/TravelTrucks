@@ -2,20 +2,22 @@ import { Field, Form, Formik } from "formik";
 import css from "./FiltersForm.module.css";
 import CustomButton from "../CustomButton/CustomButton.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { resetFilters, setFilters } from "../../redux/filters/slice.js";
+import { setFilters } from "../../redux/filters/slice.js";
 import { resetItems, resetPage } from "../../redux/campers/slice.js";
 import { selectIsLoading } from "../../redux/campers/selectors.js";
 import { useSearchParams } from "react-router-dom";
 import sprite from "../../icons/sprite.svg";
+import { useMemo } from "react";
 
 export default function FiltersForm() {
   const loading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = Object.fromEntries(searchParams.entries());
+  const query = useMemo(
+    () => Object.fromEntries(searchParams.entries()),
+    [searchParams]
+  );
   const { page, limit, ...initial } = query;
-  // dispatch(setFilters(initial));
-  console.log("Initial:", initial);
 
   const initialValues = {
     location: initial?.location || "",
@@ -27,8 +29,7 @@ export default function FiltersForm() {
       initial?.TV === "true" ? "tv" : "",
       initial?.bathroom === "true" ? "bathroom" : "",
       initial?.refrigerator === "true" ? "refrigerator" : "",
-    ],
-    // .filter(Boolean)
+    ].filter(Boolean),
   };
 
   const handleSubmit = (values) => {
@@ -43,8 +44,6 @@ export default function FiltersForm() {
       form: values.form,
     };
 
-    console.log("Submit: ", result);
-
     Object.entries(result).forEach(([key, value]) => {
       if (value) {
         searchParams.set(key, value);
@@ -57,7 +56,6 @@ export default function FiltersForm() {
 
     dispatch(resetItems());
     dispatch(resetPage());
-    // dispatch(resetFilters());
     dispatch(setFilters(result));
   };
 
