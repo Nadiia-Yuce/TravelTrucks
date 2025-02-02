@@ -15,8 +15,6 @@ export default function FiltersForm() {
     [searchParams]
   );
 
-  console.log(query);
-
   const initialValues = {
     location: query?.location || "",
     form: query?.form || "",

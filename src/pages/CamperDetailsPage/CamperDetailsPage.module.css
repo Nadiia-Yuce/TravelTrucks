@@ -1,13 +1,39 @@
 .detailsPage {
   max-width: 1440px;
   padding: 48px 64px 80px;
-  /* margin: 0 auto; */
+}
+
+.linkWrap {
+  position: relative;
 }
 
 .general {
   font-weight: 600;
   font-size: 24px;
   line-height: 1.33;
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  font-weight: 500;
+  color: var(--white);
+  padding: 16px 63px;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--button);
+  transition: background-color 250ms ease;
+}
+
+.back:hover,
+.back:focus {
+  background-color: var(--button-hover);
+}
+
+.back:active {
+  background-color: var(--button);
 }
 
 .imgGroup {

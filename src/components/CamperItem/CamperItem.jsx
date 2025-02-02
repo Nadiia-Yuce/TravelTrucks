@@ -4,7 +4,7 @@ import sprite from "../../icons/sprite.svg";
 import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import Feature from "../Feature/Feature.jsx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   selectFavorites,
   toggleFavorite,
@@ -30,7 +30,8 @@ export default function CamperItem({
   },
 }) {
   const dispatch = useDispatch();
-  const favorites = useSelector(selectFavorites); //array
+  const favorites = useSelector(selectFavorites);
+  const URLlocation = useLocation();
 
   const favClass = () => {
     const isFavorite = favorites.includes(id);
@@ -44,7 +45,7 @@ export default function CamperItem({
         <div className={css.wrap}>
           <h3 className={css.general}>{name}</h3>
           <div>
-            <p className={css.general}>{`€${price}`}</p>
+            <p className={css.general}>{`€${price.toFixed(2)}`}</p>
             <IconButton
               aria-label="add-to-favorite"
               onClick={() => dispatch(toggleFavorite(id))}
@@ -92,7 +93,7 @@ export default function CamperItem({
               </li>
             )}
           </ul>
-          <Link to={`/catalog/${id}`} className={css.info}>
+          <Link to={`/catalog/${id}`} state={URLlocation} className={css.info}>
             Show more
           </Link>
         </div>

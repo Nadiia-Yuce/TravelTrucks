@@ -1,7 +1,13 @@
 import css from "./CamperDetailsPage.module.css";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { getCamperDetails } from "../../redux/campers/operations.js";
 import {
   selectCurrentCamper,
@@ -22,6 +28,8 @@ export default function CamperDetailsPage() {
 
   const loading = useSelector(selectIsLoading);
   const camper = useSelector(selectCurrentCamper);
+  const URLlocation = useLocation();
+  const backLinkRef = useRef(URLlocation.state ?? "/catalog");
 
   //Запобігає прильоту null в селектор (через час очікування відповіді від серверу)
   if (loading || !camper) {
@@ -37,14 +45,19 @@ export default function CamperDetailsPage() {
 
   return (
     <div className={css.detailsPage}>
-      <h2 className={css.general} style={{ marginBottom: "8px" }}>
-        {name}
-      </h2>
+      <div className={css.linkWrap}>
+        <h2 className={css.general} style={{ marginBottom: "8px" }}>
+          {name}
+        </h2>
+        <Link to={backLinkRef.current} className={css.back}>
+          Go back
+        </Link>
+      </div>
       <Details location={location} rating={rating} reviews={reviews} />
       <p
         className={css.general}
         style={{ marginBottom: "28px", marginTop: "16px" }}
-      >{`€${price}`}</p>
+      >{`€${price.toFixed(2)}`}</p>
 
       <ul className={css.imgGroup}>
         {gallery.map((img, idx) => (
