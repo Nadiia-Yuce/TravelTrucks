@@ -6,7 +6,7 @@ import { selectFavorites } from "../../redux/favorites/slice.js";
 export default function FavoritesPage() {
   const favoriteCampers = useSelector(selectFavorites);
   return (
-    <div style={{ padding: "48px 0" }}>
+    <div style={{ padding: "120px 0 48px" }}>
       <CampersList campers={favoriteCampers} />
     </div>
   );
