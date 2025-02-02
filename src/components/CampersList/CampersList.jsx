@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./CampersList.module.css";
 import {
-  selectCampers,
   selectError,
   selectIsLoading,
   selectTotal,
@@ -13,7 +12,7 @@ import Spinner from "../Spinner/Spinner.jsx";
 import { useSearchParams } from "react-router-dom";
 import { resetItems } from "../../redux/campers/slice.js";
 
-export default function CampersList() {
+export default function CampersList({ campers, showed = false }) {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = useMemo(
@@ -42,12 +41,14 @@ export default function CampersList() {
     prevFilters.currentPage = page;
     prevFilters.currentLimit = limit;
 
-    dispatch(fetchCampers({ page, limit, filters }));
-  }, [filters, page, limit, dispatch, searchParams]);
+    if (showed) {
+      dispatch(fetchCampers({ page, limit, filters }));
+    }
+  }, [filters, page, limit, dispatch, searchParams, showed]);
 
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const campers = useSelector(selectCampers);
+  // const campers = useSelector(selectCampers);
   const total = useSelector(selectTotal);
 
   const totalPages = Math.ceil(total / limit);
@@ -75,7 +76,7 @@ export default function CampersList() {
               </li>
             ))}
           </ul>
-          {!loading && !error && (
+          {!loading && !error && showed && (
             <button
               type="button"
               className={css.btn}

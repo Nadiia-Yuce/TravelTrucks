@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Navigation from "./components/Navigation/Navigation.jsx";
 import Spinner from "./components/Spinner/Spinner.jsx";
 import "./App.css";
+import FavoritesPage from "./pages/FavoritesPage/FavoritesPage.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
 const CatalogPage = lazy(() => import("./pages/CatalogPage/CatalogPage.jsx"));
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="features" element={<CamperFeatures />} />
             <Route path="reviews" element={<CamperReviews />} />
           </Route>
+          <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

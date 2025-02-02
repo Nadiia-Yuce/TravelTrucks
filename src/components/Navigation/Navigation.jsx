@@ -20,6 +20,9 @@ export default function Navigation() {
         <NavLink className={getActiveClass} to="/catalog">
           Catalog
         </NavLink>
+        <NavLink className={getActiveClass} to="/favorites">
+          Favorites
+        </NavLink>
       </nav>
     </header>
   );

@@ -21,7 +21,7 @@ nav {
   transition: color 250ms ease;
 }
 
-.link:first-child {
+.link:not(:last-child) {
   margin-right: 32px;
 }
 

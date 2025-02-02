@@ -45,15 +45,13 @@ export default function CamperDetailsPage() {
 
   return (
     <div className={css.detailsPage}>
-      <div className={css.linkWrap}>
-        <h2 className={css.general} style={{ marginBottom: "8px" }}>
-          {name}
-        </h2>
-        <Link to={backLinkRef.current} className={css.back}>
-          Go back
-        </Link>
-      </div>
-      <Details location={location} rating={rating} reviews={reviews} />
+      <h2 className={css.general} style={{ marginBottom: "8px" }}>
+        {name}
+      </h2>
+      <Link to={backLinkRef.current} className={css.back}>
+        Go back
+      </Link>
+      <Details location={location} rating={rating} reviews={reviews} id={id} />
       <p
         className={css.general}
         style={{ marginBottom: "28px", marginTop: "16px" }}

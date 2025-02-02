@@ -14,3 +14,14 @@
   height: 16px;
   fill: var(--rating);
 }
+
+.link {
+  text-decoration: underline;
+  text-decoration-color: inherit;
+  transition: text-decoration-color 100ms ease;
+}
+
+.link:hover,
+.link:focus {
+  text-decoration-color: transparent;
+}

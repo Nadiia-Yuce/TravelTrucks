@@ -11,8 +11,8 @@ import {
 } from "../../redux/favorites/slice.js";
 import Details from "../Details/Details.jsx";
 
-export default function CamperItem({
-  camper: {
+export default function CamperItem({ camper }) {
+  const {
     id,
     name,
     price,
@@ -27,14 +27,13 @@ export default function CamperItem({
     AC,
     TV,
     water,
-  },
-}) {
+  } = camper;
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
   const URLlocation = useLocation();
 
   const favClass = () => {
-    const isFavorite = favorites.includes(id);
+    const isFavorite = favorites.some((item) => item.id === id);
     return clsx(css.icon, isFavorite && css.favorite);
   };
 
@@ -48,7 +47,7 @@ export default function CamperItem({
             <p className={css.general}>{`€${price.toFixed(2)}`}</p>
             <IconButton
               aria-label="add-to-favorite"
-              onClick={() => dispatch(toggleFavorite(id))}
+              onClick={() => dispatch(toggleFavorite(camper))}
             >
               <svg className={favClass()}>
                 <use href={`${sprite}#icon-heart`} />
@@ -57,7 +56,12 @@ export default function CamperItem({
           </div>
         </div>
 
-        <Details location={location} rating={rating} reviews={reviews} />
+        <Details
+          location={location}
+          rating={rating}
+          reviews={reviews}
+          id={id}
+        />
 
         <p className={css.descr}>{description}</p>
         <div className={css.lastWrap}>
