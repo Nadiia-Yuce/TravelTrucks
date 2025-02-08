@@ -1,19 +1,21 @@
-import { NavLink } from "react-router-dom";
-import css from "./Navigation.module.css";
-import clsx from "clsx";
+import { Link, NavLink } from "react-router-dom";
+import css from "./Header.module.css";
 import sprite from "../../icons/sprite.svg";
+import MobileNavigationMenu from "../MobileNavigationMenu/MobileNavigationMenu.jsx";
+import clsx from "clsx";
 
-export default function Navigation() {
+export default function Header() {
   const getActiveClass = ({ isActive }) => {
     return clsx(css.link, isActive && css.active);
   };
-
   return (
     <header className={css.header}>
-      <svg className={css.logo}>
-        <use href={`${sprite}#icon-logo`} />
-      </svg>
-      <nav>
+      <Link to="/">
+        <svg className={css.logo}>
+          <use href={`${sprite}#icon-logo`} />
+        </svg>
+      </Link>
+      <nav className={css.nav}>
         <NavLink className={getActiveClass} to="/">
           Home
         </NavLink>
@@ -24,6 +26,9 @@ export default function Navigation() {
           Favorites
         </NavLink>
       </nav>
+      <div className={css.menu}>
+        <MobileNavigationMenu />
+      </div>
     </header>
   );
 }

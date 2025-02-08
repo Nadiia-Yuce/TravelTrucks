@@ -15,15 +15,15 @@
 
 .title {
   font-weight: 600;
-  font-size: 48px;
-  line-height: 0.67;
+  font-size: 40px;
+  line-height: 0.9;
   color: var(--inputs);
   margin-bottom: 16px;
 }
 
 .subtitle {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.33;
   color: var(--inputs);
   margin-bottom: 40px;
@@ -58,4 +58,18 @@
       ),
       url("../../images/background-x2.jpg");
   }
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 48px;
+    line-height: 0.67;
+  }
+
+  .subtitle {
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
 }

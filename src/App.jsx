@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Navigation from "./components/Navigation/Navigation.jsx";
+import Header from "./components/Header/Header.jsx";
 import Spinner from "./components/Spinner/Spinner.jsx";
 import "./App.css";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage.jsx";
@@ -24,7 +24,7 @@ const CamperReviews = lazy(() =>
 export default function App() {
   return (
     <>
-      <Navigation />
+      <Header />
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
