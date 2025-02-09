@@ -20,7 +20,7 @@ export default function Details({ location, rating, reviews, id }) {
       </div>
 
       <div className={css.rating}>
-        <svg width={16} height={16}>
+        <svg className={css.map}>
           <use href={`${sprite}#icon-map`} />
         </svg>
         <p>{location}</p>

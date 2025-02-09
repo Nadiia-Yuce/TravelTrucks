@@ -14,8 +14,8 @@
 .item {
   border: 1px solid var(--gray-light);
   border-radius: 20px;
-  padding: 24px;
-  width: 888px;
+  padding: 12px;
+  width: 300px;
 }
 
 .item:not(:last-child) {
@@ -50,5 +50,17 @@
   color: var(--gray-light);
   border: 1px solid var(--gray-light);
   cursor: not-allowed;
-  /* pointer-events: none; */
+}
+
+@media screen and (min-width: 768px) {
+  .item {
+    width: 650px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .item {
+    padding: 24px;
+    width: 888px;
+  }
 }

@@ -69,7 +69,7 @@ export default function CampersList({ campers, showed = false }) {
         </p>
       ) : (
         <div className={css.container}>
-          <ul>
+          <ul className={css.list}>
             {campers.map((camper) => (
               <li key={camper.id} className={css.item}>
                 <CamperItem camper={camper} />

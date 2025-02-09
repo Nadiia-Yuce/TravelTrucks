@@ -72,7 +72,7 @@ export default function CamperItem({ camper }) {
               </li>
             )}
             {engine === "petrol" && (
-              <li>
+              <li className={css.petrol}>
                 <Feature icon="fuel" feature="Petrol" />
               </li>
             )}
@@ -87,7 +87,7 @@ export default function CamperItem({ camper }) {
               </li>
             )}
             {TV && (
-              <li>
+              <li className={css.tv}>
                 <Feature icon="tv" feature="TV" />
               </li>
             )}

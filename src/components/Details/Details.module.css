@@ -1,18 +1,29 @@
 .details {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 4px;
+
+  position: absolute;
+  top: 63px;
+  right: 60px;
 }
 
 .rating {
+  font-size: 12px;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
 .star {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   fill: var(--rating);
+}
+
+.map {
+  width: 12px;
+  height: 12px;
 }
 
 .link {
@@ -24,4 +35,27 @@
 .link:hover,
 .link:focus {
   text-decoration-color: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .details {
+    flex-direction: row;
+    justify-content: start;
+    gap: 16px;
+    position: static;
+  }
+
+  .rating {
+    font-size: 16px;
+  }
+
+  .star {
+    width: 16px;
+    height: 16px;
+  }
+
+  .map {
+    width: 16px;
+    height: 16px;
+  }
 }
