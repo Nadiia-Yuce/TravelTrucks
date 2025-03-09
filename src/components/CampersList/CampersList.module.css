@@ -2,6 +2,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .container {
@@ -62,5 +63,9 @@
   .item {
     padding: 24px;
     width: 888px;
+  }
+
+  .notFound {
+    transform: none;
   }
 }

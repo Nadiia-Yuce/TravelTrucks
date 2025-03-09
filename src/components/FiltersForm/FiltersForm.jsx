@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import sprite from "../../icons/sprite.svg";
 import { useMemo } from "react";
 
-export default function FiltersForm() {
+export default function FiltersForm({ onClick }) {
   const loading = useSelector(selectIsLoading);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = useMemo(
@@ -49,6 +49,10 @@ export default function FiltersForm() {
     });
     searchParams.set("page", "1");
     setSearchParams(searchParams);
+
+    if (window.innerWidth < 1440) {
+      onClick();
+    }
   };
 
   return (
@@ -150,13 +154,22 @@ export default function FiltersForm() {
             </div>
           </fieldset>
 
-          <button
-            type="submit"
-            className={css.btn}
-            disabled={!dirty || loading}
-          >
-            Search
-          </button>
+          <div className={css.buttons}>
+            <button
+              type="submit"
+              className={css.btn}
+              disabled={!dirty || loading}
+            >
+              Search
+            </button>
+            <button
+              type="button"
+              className={`${css.btn} ${css.hidden}`}
+              onClick={onClick}
+            >
+              Cancel
+            </button>
+          </div>
         </Form>
       )}
     </Formik>

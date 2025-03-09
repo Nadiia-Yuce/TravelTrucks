@@ -1,22 +1,22 @@
-.text {
-  color: var(--text);
-  margin-top: 40px;
-  margin-bottom: 32px;
+.form {
+  max-width: 288px;
+  margin: 0 auto;
 }
 
 .wrap {
-  position: relative;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .label {
   color: var(--gray);
   margin-bottom: 8px;
+  margin-top: 40px;
 }
 
 .input {
-  width: 360px;
+  width: 288px;
   padding: 16px 32px 16px 48px;
   border-radius: 12px;
   border: none;
@@ -28,9 +28,15 @@
   height: 20px;
   fill: var(--gray);
   position: absolute;
-  top: 46px;
   left: 20px;
+  bottom: 16px;
   transition: fill 250ms ease;
+}
+
+.text {
+  color: var(--text);
+  margin-top: 40px;
+  margin-bottom: 32px;
 }
 
 .input:focus + .map,
@@ -43,7 +49,7 @@ fieldset {
 }
 
 .filter {
-  width: 100%;
+  width: 288px;
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
@@ -53,7 +59,6 @@ fieldset {
 }
 
 .checkboxGroup {
-  max-width: 360px;
   margin-bottom: 32px;
   display: flex;
   flex-wrap: wrap;
@@ -66,8 +71,14 @@ fieldset {
   margin-bottom: 40px;
 }
 
+.buttons {
+  max-width: 288px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .btn {
-  padding: 16px 56px;
+  padding: 12px 24px;
   border: none;
   border-radius: 50px;
   background-color: var(--button);
@@ -89,4 +100,47 @@ fieldset {
   background-color: var(--badges);
   color: var(--gray);
   cursor: not-allowed;
+}
+
+@media screen and (min-width: 392px) {
+  .form {
+    max-width: 360px;
+  }
+
+  .filter {
+    width: 100%;
+  }
+
+  .input {
+    width: 360px;
+  }
+
+  .buttons {
+    max-width: 360px;
+  }
+
+  .btn {
+    padding: 12px 56px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .btn {
+    padding: 16px 60px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .label {
+    margin-top: 0;
+  }
+
+  .checkboxGroup {
+    /* max-width: 360px; */
+    justify-content: start;
+  }
+
+  .hidden {
+    display: none;
+  }
 }

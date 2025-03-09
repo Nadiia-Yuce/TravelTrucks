@@ -48,7 +48,6 @@ export default function CampersList({ campers, showed = false }) {
 
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  // const campers = useSelector(selectCampers);
   const total = useSelector(selectTotal);
 
   const totalPages = Math.ceil(total / limit);
@@ -65,7 +64,7 @@ export default function CampersList({ campers, showed = false }) {
 
       {(!loading && campers.length === 0) || error ? (
         <p className={css.notFound}>
-          There are no campers, matching your query!
+          There are no campers, matching your query! Check your filters.
         </p>
       ) : (
         <div className={css.container}>

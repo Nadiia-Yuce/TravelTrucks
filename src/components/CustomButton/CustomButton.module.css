@@ -11,8 +11,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 112px;
-  height: 96px;
+  width: 87px;
+  height: 71px;
   border-radius: 12px;
   border: 1px solid var(--gray-light);
   cursor: pointer;
@@ -24,13 +24,32 @@
 }
 
 .icon {
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
 }
 
 .text {
-  margin-top: 8px;
-  font-weight: 500;
+  margin-top: 4px;
   text-align: center;
+  font-size: 14px;
+  line-height: 1;
+}
+
+@media screen and (min-width: 392px) {
+  .custom {
+    width: 112px;
+    height: 96px;
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .text {
+    font-weight: 500;
+    line-height: 1.5;
+    margin-top: 8px;
+  }
 }
