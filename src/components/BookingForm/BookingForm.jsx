@@ -64,6 +64,7 @@ export default function BookingForm() {
             <Field name="date">
               {({ field, form }) => (
                 <DatePicker
+                  wrapperClassName={css.data}
                   selected={field.value}
                   onChange={(val) => form.setFieldValue(field.name, val)}
                   placeholderText="Booking date*"

@@ -45,7 +45,7 @@ export default function CamperFeatures() {
   };
 
   return (
-    <div className={css.container}>
+    <section className={css.container}>
       <ul className={css.features}>
         {transmission === "automatic" && (
           <li>
@@ -133,6 +133,6 @@ export default function CamperFeatures() {
           </li>
         </ul>
       </div>
-    </div>
+    </section>
   );
 }

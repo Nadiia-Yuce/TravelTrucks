@@ -59,7 +59,7 @@ export default function CampersList({ campers, showed = false }) {
   };
 
   return (
-    <div>
+    <section>
       {loading && <Spinner />}
 
       {(!loading && campers.length === 0) || error ? (
@@ -87,6 +87,6 @@ export default function CampersList({ campers, showed = false }) {
           )}
         </div>
       )}
-    </div>
+    </section>
   );
 }

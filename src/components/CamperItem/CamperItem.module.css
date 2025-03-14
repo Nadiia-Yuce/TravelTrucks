@@ -47,6 +47,12 @@
   fill: var(--button);
 }
 
+.detailsWrap {
+  position: absolute;
+  top: 63px;
+  right: 60px;
+}
+
 .descr {
   display: none;
 }
@@ -96,23 +102,21 @@ info:focus {
 @media screen and (min-width: 768px) {
   .container {
     display: flex;
-
     gap: 20px;
   }
-
-  /* .features {
-    margin-top: 0;
-  } */
 
   .img {
     width: 292px;
     height: 320px;
   }
 
+  .detailsWrap {
+    position: static;
+  }
+
   .wrap {
     width: 100%;
     position: static;
-    /* align-items: center; */
   }
 
   .wrap div {

@@ -3,6 +3,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Header from "./components/Header/Header.jsx";
 import Spinner from "./components/Spinner/Spinner.jsx";
+import "swiper/css";
+import "swiper/css/pagination";
 import "./App.css";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage.jsx";
 

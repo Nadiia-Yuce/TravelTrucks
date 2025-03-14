@@ -1,18 +1,19 @@
 .detailsPage {
-  max-width: 1440px;
-  padding: 120px 64px 80px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 72px 12px 104px;
 }
 
 .general {
+  font-size: 16px;
   font-weight: 600;
-  font-size: 24px;
   line-height: 1.33;
 }
 
 .back {
   position: fixed;
   bottom: 24px;
-  right: 24px;
+  right: 12px;
   z-index: 999;
 
   font-weight: 500;
@@ -20,31 +21,22 @@
   padding: 16px 63px;
   border: none;
   border-radius: 50px;
-  background-color: var(--button);
+  background-color: rgba(228, 72, 72, 0.7);
   transition: background-color 250ms ease;
 }
 
 .back:hover,
-.back:focus {
-  background-color: var(--button-hover);
-}
-
+.back:focus,
 .back:active {
   background-color: var(--button);
 }
 
 .imgGroup {
-  display: flex;
-  gap: 48px;
-  margin-bottom: 28px;
+  display: none;
 }
 
-.img {
-  border-radius: 10px;
-  width: 292px;
-  height: 312px;
-  object-fit: cover;
-  object-position: center;
+.mySwiper {
+  margin-bottom: 28px;
 }
 
 .text {
@@ -61,7 +53,7 @@
 
 .link {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.2;
   transition: border 0.3s ease-out;
 }
@@ -71,7 +63,84 @@
   border-bottom: 5px solid var(--button);
 }
 
-.wrap {
-  display: flex;
-  gap: 40px;
+.swiperImg {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (min-width: 425px) {
+  .detailsPage {
+    padding: 72px 24px 104px;
+  }
+
+  .link {
+    font-size: 20px;
+  }
+
+  .general {
+    font-size: 20px;
+  }
+
+  .back {
+    right: 24px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .detailsPage {
+    max-width: 768px;
+  }
+
+  .general {
+    font-size: 24px;
+  }
+
+  .mySwiper {
+    display: none;
+  }
+
+  .imgGroup {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .img {
+    border-radius: 10px;
+    width: 292px;
+    height: 312px;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .detailsPage {
+    max-width: 1024px;
+  }
+
+  .img {
+    width: 100%;
+  }
+
+  .wrap {
+    display: flex;
+    gap: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .detailsPage {
+    max-width: 1440px;
+    padding: 120px 64px 80px;
+  }
+
+  .imgGroup {
+    gap: 24px;
+  }
+
+  .wrap {
+    gap: 40px;
+  }
 }

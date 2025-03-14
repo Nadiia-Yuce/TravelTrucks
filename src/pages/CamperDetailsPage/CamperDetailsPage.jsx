@@ -17,6 +17,8 @@ import Details from "../../components/Details/Details.jsx";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import clsx from "clsx";
 import BookingForm from "../../components/BookingForm/BookingForm.jsx";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
 
 export default function CamperDetailsPage() {
   const { id } = useParams();
@@ -44,7 +46,7 @@ export default function CamperDetailsPage() {
   };
 
   return (
-    <div className={css.detailsPage}>
+    <article className={css.detailsPage}>
       <h2 className={css.general} style={{ marginBottom: "8px" }}>
         {name}
       </h2>
@@ -65,6 +67,25 @@ export default function CamperDetailsPage() {
         ))}
       </ul>
 
+      <Swiper
+        loop={true}
+        pagination={{
+          dynamicBullets: true,
+        }}
+        modules={[Pagination]}
+        className={css.mySwiper}
+      >
+        {gallery.map((img, idx) => (
+          <SwiperSlide key={idx}>
+            <img
+              src={img.original}
+              alt="Camper's photo"
+              className={css.swiperImg}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
       <p className={css.text}>{description}</p>
       <ul className={css.subPages}>
         <li>
@@ -82,6 +103,6 @@ export default function CamperDetailsPage() {
         <Outlet />
         <BookingForm />
       </div>
-    </div>
+    </article>
   );
 }

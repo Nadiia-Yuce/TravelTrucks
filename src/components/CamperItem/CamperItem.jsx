@@ -56,12 +56,14 @@ export default function CamperItem({ camper }) {
           </div>
         </div>
 
-        <Details
-          location={location}
-          rating={rating}
-          reviews={reviews}
-          id={id}
-        />
+        <div className={css.detailsWrap}>
+          <Details
+            location={location}
+            rating={rating}
+            reviews={reviews}
+            id={id}
+          />
+        </div>
 
         <p className={css.descr}>{description}</p>
         <div className={css.lastWrap}>

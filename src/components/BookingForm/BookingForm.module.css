@@ -1,10 +1,9 @@
 .container {
   border: 1px solid var(--gray-light);
   border-radius: 10px;
-  padding: 44px 57px;
-  margin-top: 44px;
-  width: 640px;
-  height: 590px;
+  margin-top: 24px;
+  padding: 16px;
+  width: 100%;
 }
 
 .title {
@@ -19,17 +18,13 @@
   margin-bottom: 24px;
 }
 
-.form {
-  /* position: relative; */
-}
-
 .inputWrap {
   position: relative;
 }
 
 .input,
 .comment {
-  width: 527px;
+  width: 100%;
   padding: 18px;
   border: none;
   border-radius: 12px;
@@ -39,6 +34,10 @@
 .comment {
   height: 118px;
   resize: none;
+}
+
+.data {
+  width: 100%;
 }
 
 .inputWrap:not(:last-child) {
@@ -53,7 +52,6 @@
   color: var(--button);
   position: absolute;
   font-size: 10px;
-  /* top: 52px; */
   right: 0;
 }
 
@@ -66,6 +64,10 @@
   border-radius: 50px;
   background-color: var(--button);
   transition: background-color 250ms ease;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .submit:hover,
@@ -153,4 +155,25 @@
 
 :global(.react-datepicker__day--disabled) {
   color: var(--gray-light);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    margin-top: 44px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: 24px 16px;
+    margin-top: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    /* width: 640px; */
+    padding: 44px 57px;
+    margin-top: 44px;
+  }
 }
