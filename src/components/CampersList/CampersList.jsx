@@ -12,7 +12,11 @@ import Spinner from "../Spinner/Spinner.jsx";
 import { useSearchParams } from "react-router-dom";
 import { resetItems } from "../../redux/campers/slice.js";
 
-export default function CampersList({ campers, showed = false }) {
+export default function CampersList({
+  campers,
+  showed = false,
+  isFavoriteList = false,
+}) {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = useMemo(
@@ -63,9 +67,18 @@ export default function CampersList({ campers, showed = false }) {
       {loading && <Spinner />}
 
       {(!loading && campers.length === 0) || error ? (
-        <p className={css.notFound}>
-          There are no campers, matching your query! Check your filters.
-        </p>
+        isFavoriteList ? (
+          <p
+            className={css.notFound}
+            style={{ width: "90%", transform: "translate(-50%, -50%)" }}
+          >
+            You don&apos;t have any Favorite campers yet!
+          </p>
+        ) : (
+          <p className={css.notFound}>
+            There are no campers matching your query! Check your filters.
+          </p>
+        )
       ) : (
         <div className={css.container}>
           <ul className={css.list}>

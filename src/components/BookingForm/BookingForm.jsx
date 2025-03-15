@@ -22,8 +22,9 @@ export default function BookingForm() {
   });
   const loading = useSelector(selectIsLoading);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, { resetForm }) => {
     toast.success("Camper successfully booked!");
+    resetForm();
     // console.log(values);
   };
 

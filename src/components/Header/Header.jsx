@@ -10,7 +10,6 @@ export default function Header() {
   };
   return (
     <header className={css.header}>
-      {/* <div style={{ position: "relative", width: "1024px" }}> */}
       <Link to="/">
         <svg className={css.logo}>
           <use href={`${sprite}#icon-logo`} />
@@ -27,7 +26,6 @@ export default function Header() {
           Favorites
         </NavLink>
       </nav>
-      {/* </div> */}
       <div className={css.menu}>
         <MobileNavigationMenu />
       </div>

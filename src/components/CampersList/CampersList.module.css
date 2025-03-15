@@ -1,8 +1,10 @@
 .notFound {
+  width: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .container {
@@ -64,8 +66,11 @@
     padding: 24px;
     width: 888px;
   }
+}
 
+@media screen and (min-width: 1440px) {
   .notFound {
+    width: auto;
     transform: none;
   }
 }

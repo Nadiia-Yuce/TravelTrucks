@@ -22,11 +22,11 @@ export default function MobileNavigationMenu() {
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ mr: 2 }}
         onClick={() => setIsOpen(true)}
       >
         <MenuIcon />
       </IconButton>
+
       <Drawer anchor="right" open={isOpen} onClose={handleClose}>
         <nav className={css.nav}>
           <NavLink className={getActiveClass} to="/" onClick={handleClose}>
